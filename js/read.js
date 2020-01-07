@@ -157,6 +157,7 @@ $(function(){
 						var obj = readHistories[key];
 						if(obj.name == name&&obj.href == href){
 							obj.index = _this.index;
+							obj.title = _this.title;
 							flag = true;
 						}
 					}
