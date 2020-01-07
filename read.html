@@ -26,7 +26,7 @@
 			  <div class="mui-scroll">
 				<!-- 菜单具体展示内容 -->
 				<ul class="mui-table-view">
-					<li v-for="item,index in list" class="mui-table-view-cell">
+					<li v-for="item,index in list" class="mui-table-view-cell" :class="{'reading':reading_index==index}">
 						<a class="mui-navigate-right" @click="look(item,index)">
 							{{item.title}}
 						</a>
@@ -40,7 +40,7 @@
 			<div id="content" v-cloak>
 				<header class="mui-bar mui-bar-nav">
 					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-					<h1 class="mui-title">{{title}}</h1>
+					<h1 class="mui-title">{{name}}  {{title}}</h1>
 					<a class="mui-icon mui-pull-right" href="#offCanvasSide">目录</a>
 				</header>
 				<div class="mui-scroll-wrapper flex" id="contentWrapper">

@@ -5,7 +5,7 @@ $(function(){
 	    el: "#mulu",
 	    data:{
 			list:[],
-			index:null
+			reading_index:null
 	    },
 	    mounted:function(){
 	        this.init();
@@ -44,19 +44,19 @@ $(function(){
 						_this.list = _list;
 						
 						var readHistories = window.localStorage.getItem('readHistories')?JSON.parse(window.localStorage.getItem('readHistories')):[];
-						var index = 0;
+						var reading_index = 0;
 						if(readHistories.length>0){
 							for(key in readHistories){
 								var obj = readHistories[key];
 								if(obj.name == name&&obj.href == href){
-									index = obj.index;
+									reading_index = obj.index;
 									content.flag = true;
 								}
 							}
 						}
-						_this.index = index;
+						_this.reading_index = reading_index;
 						if(_list.length>0){
-							content.init(_list[index].href,index);
+							content.init(_list[reading_index].href,reading_index);
 						}
 						
 						
@@ -76,6 +76,8 @@ $(function(){
 			},
 			//阅读某一章
 			look:function(item,index){
+				var _this = this;
+				_this.reading_index = index;
 				content.init(item.href,index);
 			}
 	    }
@@ -83,6 +85,7 @@ $(function(){
     content = new Vue({
         el: "#content",
         data:{
+			name:'',
 			title:'',
 			content:'',
 			index:null,
@@ -101,7 +104,7 @@ $(function(){
 					type:'GET',
 					timeout:8000,
 					success:function(data){
-						
+						_this.name = window.localStorage.getItem('name')?window.localStorage.getItem('name'):'';
 						var titleArr = data.match(/<div class="bookname">([\s\S]*?)<h1>([\s\S]*?)<\/h1>/);
 						var title = titleArr&&(titleArr.length==3)?titleArr[2]:'';
 						_this.title = title;
@@ -162,7 +165,8 @@ $(function(){
 					var readHistory = {
 						name:name,
 						href:href,
-						index:_this.index
+						index:_this.index,
+						title:_this.title
 					};
 					readHistories.push(readHistory);
 				}
