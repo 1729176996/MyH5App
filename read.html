@@ -27,7 +27,7 @@
 				<!-- 菜单具体展示内容 -->
 				<ul class="mui-table-view">
 					<li v-for="item,index in list" class="mui-table-view-cell" :class="{'reading':reading_index==index}">
-						<a class="mui-navigate-right" @click="look(item,index)">
+						<a class="mui-navigate-right" @tap="look(item,index)">
 							{{item.title}}
 						</a>
 					</li>
@@ -51,15 +51,15 @@
 					</div>
 				</div>
 				<nav class="mui-bar mui-bar-tab" v-show="index!=null&&index!=undefined">
-					<a class="mui-tab-item" @click="pre">
+					<a class="mui-tab-item" @tap="pre">
 						<span class="mui-icon mui-icon-arrowthinleft"></span>
 						<span class="mui-tab-label">上一章</span>
 					</a>
-					<a class="mui-tab-item mui-active" @click="save">
+					<a class="mui-tab-item mui-active" @tap="save">
 						<span class="mui-icon" :class="{'mui-icon-starhalf':flag,'mui-icon-star':!flag}"></span>
 						<span class="mui-tab-label">{{flag?'更新阅读进度':'保存阅读进度'}}</span>
 					</a>
-					<a class="mui-tab-item" @click="next">
+					<a class="mui-tab-item" @tap="next">
 						<span class="mui-icon mui-icon-arrowthinright"></span>
 						<span class="mui-tab-label">下一章</span>
 					</a>
