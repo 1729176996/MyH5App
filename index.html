@@ -19,7 +19,7 @@
 	<body>
 		<div id="main" v-cloak>
 			<header class="mui-bar mui-bar-nav">
-				<h1 class="mui-title">小说</h1>
+				<h1 class="mui-title">{{type=='all'?'小说列表':'阅读进度'}}</h1>
 				<a class="mui-icon mui-icon-arrowthinup mui-pull-right" @click="toTop"></a>
 			</header>
 			<div class="mui-scroll-wrapper" id="scrollWrapper">
@@ -65,11 +65,11 @@
 				</div>
 			</div>
 			<nav class="mui-bar mui-bar-tab">
-				<a class="mui-tab-item mui-active" @click="toAll">
+				<a class="mui-tab-item" :class="{'mui-active':type=='all'}" @click="toAll">
 					<span class="mui-icon mui-icon-home"></span>
-					<span class="mui-tab-label">全部</span>
+					<span class="mui-tab-label">小说列表</span>
 				</a>
-				<a class="mui-tab-item" @click="toHistory">
+				<a class="mui-tab-item" :class="{'mui-active':type!='all'}" @click="toHistory">
 					<span class="mui-icon mui-icon-phone"></span>
 					<span class="mui-tab-label">阅读进度</span>
 				</a>
