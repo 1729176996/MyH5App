@@ -82,6 +82,27 @@ $(function(){
 				var _this = this;
 				_this.type = 'history';
 				_this.readHistories = window.localStorage.getItem('readHistories')?JSON.parse(window.localStorage.getItem('readHistories')):[];
+				_this.$nextTick(function(){
+					loading.hide();
+					mui('#scrollWrapper').scroll({
+						indicators:false,
+						deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+					}).scrollTo(0,0,0);
+					
+					var lis = $('#readHistories li');
+					for(key in lis){
+						mui.swipeoutClose(lis[key]);
+					}
+				})
+			},
+			deleteReadHistory:function(item){
+				var _this = this;
+				var readHistories = window.localStorage.getItem('readHistories')?JSON.parse(window.localStorage.getItem('readHistories')):[];
+				var _readHistories = readHistories.filter(function (obj) {
+					return !(obj.name == item.name&&obj.href == item.href);
+				});
+				window.localStorage.setItem('readHistories',JSON.stringify(_readHistories));
+				_this.toHistory();
 			},
 			sub:function(){
 				
