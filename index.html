@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>首页</title>
+		<link href="css/mui.min.css" rel="stylesheet"/>
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/fastclick.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/weui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="main" v-cloak>
+			<header class="mui-bar mui-bar-nav">
+				<h1 class="mui-title">小说</h1>
+				<a class="mui-icon mui-icon-arrowthinup mui-pull-right" @click="toTop"></a>
+			</header>
+			<div class="mui-scroll-wrapper" id="scrollWrapper">
+				<div class="mui-scroll">
+					<!--这里放置真实显示的DOM内容-->
+					
+					<ul class="mui-table-view">
+						<li v-for="item in list" class="mui-table-view-cell mui-collapse">
+							<a class="mui-navigate-right" href="#">{{item.type}}</a>
+							<div v-for="obj in item.list" class="mui-collapse-content" @click="look(obj)">
+								<p>{{obj.name}}</p>
+							</div>
+						</li>
+					</ul>
+					
+				</div>
+			</div>
+			
+			
+		</div>
+	</body>
+</html>
