@@ -10,7 +10,18 @@ $(function(){
 	    },
 	    mounted:function(){
 	        var _this = this;
-			_this.toAll();
+			var type = window.localStorage.getItem('type');
+			if(type){
+				_this.type = type;
+				if(type=='all'){
+					_this.toAll();
+				}else{
+					_this.toHistory();
+				}
+			}else{
+				_this.type = 'all';
+				_this.toAll();
+			}
 	    },
 	    methods:{
 			init:function(){
@@ -63,8 +74,10 @@ $(function(){
 				})
 			},
 			look:function(item){
+				var _this = this;
 				window.localStorage.setItem('name',item.name);
 				window.localStorage.setItem('href',item.href);
+				window.localStorage.setItem('type',_this.type);
 				window.location.href = 'read.html';
 			},
 			toTop:function(){
