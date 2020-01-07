@@ -61,6 +61,7 @@ $(function(){
 				})
 			},
 			look:function(item){
+				window.localStorage.setItem('name',item.name);
 				window.localStorage.setItem('href',item.href);
 				window.location.href = 'read.html';
 			},

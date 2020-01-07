@@ -51,9 +51,13 @@
 					</div>
 				</div>
 				<nav class="mui-bar mui-bar-tab" v-show="index!=null&&index!=undefined">
-					<a class="mui-tab-item mui-active" @click="pre">
+					<a class="mui-tab-item" @click="pre">
 						<span class="mui-icon mui-icon-arrowthinleft"></span>
 						<span class="mui-tab-label">上一章</span>
+					</a>
+					<a class="mui-tab-item mui-active" @click="save">
+						<span class="mui-icon" :class="{'mui-icon-starhalf':flag,'mui-icon-star':!flag}"></span>
+						<span class="mui-tab-label">{{flag?'更新阅读进度':'保存阅读进度'}}</span>
 					</a>
 					<a class="mui-tab-item" @click="next">
 						<span class="mui-icon mui-icon-arrowthinright"></span>

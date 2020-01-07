@@ -4,16 +4,19 @@ $(function(){
 	mulu = new Vue({
 	    el: "#mulu",
 	    data:{
-			list:[]
+			list:[],
+			index:null
 	    },
 	    mounted:function(){
 	        this.init();
 	    },
 	    methods:{
+			//初始化目录
 			init:function(){
 				var _this = this;
-				var url = window.localStorage.getItem('href');
-				if(!url){
+				var href = window.localStorage.getItem('href');
+				var name = window.localStorage.getItem('name');
+				if(!href){
 					mui.alert('没有获取到正确的页面地址','提示','确定',function(){
 						window.history.back();
 					},'div');
@@ -21,7 +24,7 @@ $(function(){
 				}
 				loading = weui.loading("加载中");
 				$.ajax({
-					url:url,
+					url:href,
 					type:'GET',
 					timeout:8000,
 					success:function(data){
@@ -39,9 +42,24 @@ $(function(){
 							}
 						}
 						_this.list = _list;
-						if(_list.length>0){
-							content.init(_list[0].href,0);
+						
+						var readHistories = window.localStorage.getItem('readHistories')?JSON.parse(window.localStorage.getItem('readHistories')):[];
+						var index = 0;
+						if(readHistories.length>0){
+							for(key in readHistories){
+								var obj = readHistories[key];
+								if(obj.name == name&&obj.href == href){
+									index = obj.index;
+									content.flag = true;
+								}
+							}
 						}
+						_this.index = index;
+						if(_list.length>0){
+							content.init(_list[index].href,index);
+						}
+						
+						
 						_this.$nextTick(function(){
 							loading.hide();
 							mui('#mulu').scroll({
@@ -56,12 +74,10 @@ $(function(){
 					}
 				})
 			},
+			//阅读某一章
 			look:function(item,index){
 				content.init(item.href,index);
-			},
-			sub:function(){
-				mui('.mui-off-canvas-wrap').offCanvas().close();
-	        }
+			}
 	    }
 	});
     content = new Vue({
@@ -69,13 +85,14 @@ $(function(){
         data:{
 			title:'',
 			content:'',
-			index:null
+			index:null,
+			flag:false
         },
         mounted:function(){
-            var _this = this;
-			
+            
         },
         methods:{
+			//初始化某一章
 			init:function(url,index){
 				var _this = this;
 				loading = weui.loading("加载中");
@@ -107,6 +124,7 @@ $(function(){
 					}
 				})
 			},
+			//上一章
 			pre:function(){
 				var _this = this;
 				if(_this.index===0){
@@ -115,13 +133,42 @@ $(function(){
 				}
 				_this.init(mulu.list[_this.index-1].href,_this.index-1);
 			},
+			//下一章
 			next:function(){
 				var _this = this;
-				_this.init(mulu.list[_this.index+1].href,_this.index+1);
+				if(mulu.list&&mulu.list.length>0&&mulu.list.length==(_this.index+1)){
+					mui.alert('已经是最后一章了','提示','确定',null,'div');
+				}else{
+					_this.init(mulu.list[_this.index+1].href,_this.index+1);
+				}
 			},
-			sub:function(){
-				
-            }
+			//保存阅读进度
+			save:function(){
+				var _this = this;
+				var readHistories = window.localStorage.getItem('readHistories')?JSON.parse(window.localStorage.getItem('readHistories')):[];
+				var name = window.localStorage.getItem('name')?window.localStorage.getItem('name'):'';
+				var href = window.localStorage.getItem('href')?window.localStorage.getItem('href'):'';
+				var flag = false;
+				for(key in readHistories){
+					for(key in readHistories){
+						var obj = readHistories[key];
+						if(obj.name == name&&obj.href == href){
+							obj.index = _this.index;
+							flag = true;
+						}
+					}
+				}
+				if(!flag){
+					var readHistory = {
+						name:name,
+						href:href,
+						index:_this.index
+					};
+					readHistories.push(readHistory);
+				}
+				window.localStorage.setItem('readHistories',JSON.stringify(readHistories));
+				_this.flag = true;
+			}
         }
     })
 });
