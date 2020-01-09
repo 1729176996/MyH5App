@@ -21,8 +21,15 @@
 		<!-- 侧滑导航根容器 -->
 		<div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
 		  <!-- 菜单容器 -->
-		  <aside class="mui-off-canvas-left" id="offCanvasSide">
-			<div class="mui-scroll-wrapper" id="mulu" v-cloak>
+		  <aside class="mui-off-canvas-left" id="offCanvasSide" v-cloak>
+			  <div class="detail">
+			  	<img class="cover" :src="cover" />
+				<div class="flex">
+					<div>{{name}}</div>
+					<div v-html="intro"></div>
+				</div>
+			  </div>
+			<div class="mui-scroll-wrapper flex" id="mulu">
 			  <div class="mui-scroll">
 				<!-- 菜单具体展示内容 -->
 				<ul class="mui-table-view">

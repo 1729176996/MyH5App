@@ -14,3 +14,18 @@
 	background-color:#999999;
 	color: #4CD964;
 }
+#offCanvasSide{
+	display: flex;
+	flex-direction: column;
+}
+#mulu{
+	position: relative;
+}
+#offCanvasSide .detail{
+	display: flex;
+	background-color: #fff;
+}
+#offCanvasSide .detail .cover{
+	height: 100%;
+	width: auto;
+}

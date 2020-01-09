@@ -3,10 +3,14 @@ var readHistories = [];
 $(function(){
     FastClick.attach(document.body);
 	mulu = new Vue({
-	    el: "#mulu",
+	    el: "#offCanvasSide",
 	    data:{
 			list:[],
-			reading_index:null
+			reading_index:null,
+			name:'',
+			info:'',
+			intro:'',
+			cover:''
 	    },
 	    mounted:function(){
 	        var _this = this;
@@ -48,6 +52,28 @@ $(function(){
 					type:'GET',
 					timeout:8000,
 					success:function(data){
+						
+						_this.name = name;
+						
+						//包含有作者的片段
+						var infoArr = data.match(/<div id="info">([\s\S]*?)<\/div>/);
+						var info = infoArr&&(infoArr.length==2)?infoArr[0]:'';
+						_this.info = info;
+						
+						//包含有简介的片段
+						var introArr = data.match(/<div id="intro">([\s\S]*?)<\/div>/);
+						var intro = introArr&&(introArr.length==2)?introArr[1]:'';
+						_this.intro = intro;
+						
+						var fmimgArr = data.match(/<div id="fmimg">([\s\S]*?)<\/div>/);
+						var fmimg = fmimgArr&&(fmimgArr.length==2)?fmimgArr[1]:'';
+						if(fmimg){
+							var coverArr = fmimg.match(/src="([\s\S]*?)"/);
+							var cover = coverArr&&(coverArr.length==2)?coverArr[1]:'';
+							_this.cover = cover;
+						}else{
+							_this.cover = '';
+						}
 						
 						var list = data.split(/<dd>([\s\S]*?)<\/dd>/);
 						var _list = [];
