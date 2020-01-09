@@ -1,4 +1,5 @@
 var mulu,content,loading;
+var readHistories = [];
 $(function(){
     FastClick.attach(document.body);
 	mulu = new Vue({
@@ -8,7 +9,21 @@ $(function(){
 			reading_index:null
 	    },
 	    mounted:function(){
-	        this.init();
+	        var _this = this;
+	        // H5 plus事件处理
+	        function plusReady(){
+	        	createFile('readHistories.txt',function(msg){
+	        		readFile('readHistories.txt',function(msg){
+	        			readHistories = msg?JSON.parse(msg):[];
+	        			_this.init();
+	        		},function(msg){})
+	        	},function(msg){});
+	        }
+	        if(window.plus){
+	        	plusReady();
+	        }else{
+	        	document.addEventListener('plusready',plusReady,false);
+	        }
 	    },
 	    methods:{
 			//初始化目录
@@ -43,7 +58,6 @@ $(function(){
 						}
 						_this.list = _list;
 						
-						var readHistories = window.localStorage.getItem('readHistories')?JSON.parse(window.localStorage.getItem('readHistories')):[];
 						var reading_index = 0;
 						if(readHistories.length>0){
 							for(key in readHistories){
@@ -148,18 +162,15 @@ $(function(){
 			//保存阅读进度
 			save:function(){
 				var _this = this;
-				var readHistories = window.localStorage.getItem('readHistories')?JSON.parse(window.localStorage.getItem('readHistories')):[];
 				var name = window.localStorage.getItem('name')?window.localStorage.getItem('name'):'';
 				var href = window.localStorage.getItem('href')?window.localStorage.getItem('href'):'';
 				var flag = false;
 				for(key in readHistories){
-					for(key in readHistories){
-						var obj = readHistories[key];
-						if(obj.name == name&&obj.href == href){
-							obj.index = _this.index;
-							obj.title = _this.title;
-							flag = true;
-						}
+					var obj = readHistories[key];
+					if(obj.name == name&&obj.href == href){
+						obj.index = _this.index;
+						obj.title = _this.title;
+						flag = true;
 					}
 				}
 				if(!flag){
@@ -171,8 +182,12 @@ $(function(){
 					};
 					readHistories.push(readHistory);
 				}
-				window.localStorage.setItem('readHistories',JSON.stringify(readHistories));
-				_this.flag = true;
+				writeFile('readHistories.txt',JSON.stringify(readHistories),function(msg){
+					//mui.alert('保存成功','提示','确定',null,'div');
+					_this.flag = true;
+				},function(msg){
+					mui.alert('保存失败','提示','确定',null,'div');
+				});
 			}
         }
     })
