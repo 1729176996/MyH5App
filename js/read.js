@@ -10,20 +10,25 @@ $(function(){
 	    },
 	    mounted:function(){
 	        var _this = this;
-	        // H5 plus事件处理
-	        function plusReady(){
-	        	createFile('readHistories.txt',function(msg){
-	        		readFile('readHistories.txt',function(msg){
-	        			readHistories = msg?JSON.parse(msg):[];
-	        			_this.init();
-	        		},function(msg){})
-	        	},function(msg){});
-	        }
-	        if(window.plus){
-	        	plusReady();
-	        }else{
-	        	document.addEventListener('plusready',plusReady,false);
-	        }
+			if(getBrowser()=='电脑端'){
+				readHistories = window.localStorage.getItem('readHistories')?JSON.parse(window.localStorage.getItem('readHistories')):[];
+				_this.init();
+			}else{
+				// H5 plus事件处理
+				function plusReady(){
+					createFile('readHistories.txt',function(msg){
+						readFile('readHistories.txt',function(msg){
+							readHistories = msg?JSON.parse(msg):[];
+							_this.init();
+						},function(msg){})
+					},function(msg){});
+				}
+				if(window.plus){
+					plusReady();
+				}else{
+					document.addEventListener('plusready',plusReady,false);
+				}
+			}
 	    },
 	    methods:{
 			//初始化目录
@@ -182,12 +187,17 @@ $(function(){
 					};
 					readHistories.push(readHistory);
 				}
-				writeFile('readHistories.txt',JSON.stringify(readHistories),function(msg){
-					//mui.alert('保存成功','提示','确定',null,'div');
+				if(getBrowser()=='电脑端'){
+					window.localStorage.setItem('readHistories',JSON.stringify(readHistories));
 					_this.flag = true;
-				},function(msg){
-					mui.alert('保存失败','提示','确定',null,'div');
-				});
+				}else{
+					writeFile('readHistories.txt',JSON.stringify(readHistories),function(msg){
+						//mui.alert('保存成功','提示','确定',null,'div');
+						_this.flag = true;
+					},function(msg){
+						mui.alert('保存失败','提示','确定',null,'div');
+					});
+				}
 			}
         }
     })

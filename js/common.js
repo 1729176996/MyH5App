@@ -87,3 +87,30 @@ function removeFile(fileName,successFunction,failFunction){
 		failFunction('不支持html5+');
 	}
 }
+
+//获取浏览器所在端
+function getBrowser(){
+	function IsPC(){
+		var userAgentInfo = navigator.userAgent;
+		var Agents = new Array("Android","iPhone","SymbianOS","Windows Phone","iPad", "iPod");  
+		var flag = true;
+		for(var v = 0;v<Agents.length; v++){
+			if(userAgentInfo.indexOf(Agents[v]) > 0){
+				flag = false; break;
+			}
+		}
+		return flag;
+	}
+	var browser = '';
+	if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)){
+		//苹果端
+		browser = '苹果端';
+	}else if(/(Android)/i.test(navigator.userAgent)){
+		//安卓端
+		browser = '安卓端';
+	}else{
+		//PC端
+		browser = '电脑端';
+	};
+	return browser;
+}

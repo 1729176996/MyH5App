@@ -11,32 +11,49 @@ $(function(){
 	    },
 	    mounted:function(){
 			var _this = this;
-	        // H5 plus事件处理
-	        function plusReady(){
-	        	createFile('readHistories.txt',function(msg){
-	        		readFile('readHistories.txt',function(msg){
-	        			readHistories = msg?JSON.parse(msg):[];
-	        			var type = window.localStorage.getItem('type');
-	        			if(type){
-	        				_this.type = type;
-	        				if(type=='all'){
-	        					_this.toAll();
-	        				}else{
-	        					_this.toHistory();
-	        				}
-	        			}else{
-	        				_this.type = 'all';
-	        				window.localStorage.setItem('type','all');
-	        				_this.toAll();
-	        			}
-	        		},function(msg){})
-	        	},function(msg){});
-	        }
-	        if(window.plus){
-	        	plusReady();
-	        }else{
-	        	document.addEventListener('plusready',plusReady,false);
-	        }
+			if(getBrowser()=='电脑端'){
+				readHistories = window.localStorage.getItem('readHistories')?JSON.parse(window.localStorage.getItem('readHistories')):[];
+				var type = window.localStorage.getItem('type');
+				if(type){
+					_this.type = type;
+					if(type=='all'){
+						_this.toAll();
+					}else{
+						_this.toHistory();
+					}
+				}else{
+					_this.type = 'all';
+					window.localStorage.setItem('type','all');
+					_this.toAll();
+				}
+			}else{
+				// H5 plus事件处理
+				function plusReady(){
+					createFile('readHistories.txt',function(msg){
+						readFile('readHistories.txt',function(msg){
+							readHistories = msg?JSON.parse(msg):[];
+							var type = window.localStorage.getItem('type');
+							if(type){
+								_this.type = type;
+								if(type=='all'){
+									_this.toAll();
+								}else{
+									_this.toHistory();
+								}
+							}else{
+								_this.type = 'all';
+								window.localStorage.setItem('type','all');
+								_this.toAll();
+							}
+						},function(msg){})
+					},function(msg){});
+				}
+				if(window.plus){
+					plusReady();
+				}else{
+					document.addEventListener('plusready',plusReady,false);
+				}
+			}
 	    },
 	    methods:{
 			init:function(){
@@ -119,15 +136,20 @@ $(function(){
 			},
 			deleteReadHistory:function(item){
 				var _this = this;
-				var _readHistories = readHistories.filter(function (obj) {
+				readHistories = readHistories.filter(function (obj) {
 					return !(obj.name == item.name&&obj.href == item.href);
 				});
-				writeFile('readHistories.txt',JSON.stringify(readHistories),function(msg){
-					//mui.alert('保存成功','提示','确定',null,'div');
+				if(getBrowser()=='电脑端'){
+					window.localStorage.setItem('readHistories',JSON.stringify(readHistories));
 					location.reload(true);
-				},function(msg){
-					mui.alert('保存失败','提示','确定',null,'div');
-				});
+				}else{
+					writeFile('readHistories.txt',JSON.stringify(readHistories),function(msg){
+						//mui.alert('保存成功','提示','确定',null,'div');
+						location.reload(true);
+					},function(msg){
+						mui.alert('保存失败','提示','确定',null,'div');
+					});
+				}
 			}
 	    }
 	});
