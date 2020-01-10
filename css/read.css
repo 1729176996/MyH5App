@@ -23,9 +23,20 @@
 }
 #offCanvasSide .detail{
 	display: flex;
+	flex-direction: column;
 	background-color: #fff;
 }
+#offCanvasSide .detail .info{
+	display: flex;
+}
+#offCanvasSide .detail .info >p:first-child{
+    display: none;
+}
 #offCanvasSide .detail .cover{
-	height: 100%;
-	width: auto;
+	height: 100px;
+	width: 80px;
+}
+#offCanvasSide .detail p{
+	margin-top: 0;
+	margin-bottom: 0;
 }

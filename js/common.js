@@ -1,4 +1,8 @@
 mui.init();
+String.prototype.replaceAll=function(f,e){//吧f替换成e
+    var reg=new RegExp(f,"g"); //创建正则RegExp对象   
+    return this.replace(reg,e); 
+}
 //读取文件
 function readFile(fileName,successFunction,failFunction){
 	//判断是否有5+内置的对象

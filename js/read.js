@@ -8,8 +8,8 @@ $(function(){
 			list:[],
 			reading_index:null,
 			name:'',
-			info:'',
-			intro:'',
+			infos:[],
+			intros:[],
 			cover:''
 	    },
 	    mounted:function(){
@@ -58,12 +58,22 @@ $(function(){
 						//包含有作者的片段
 						var infoArr = data.match(/<div id="info">([\s\S]*?)<\/div>/);
 						var info = infoArr&&(infoArr.length==2)?infoArr[0]:'';
-						_this.info = info;
+						var infos = info.match(/<p>([\s\S]*?)<\/p>/g);
+						for(key in infos){
+							infos[key] = infos[key].replaceAll('href','xxx').replaceAll('onclick','yyyy').replaceAll('&nbsp;','');
+						}
+						_this.infos = infos;
+						
+						
 						
 						//包含有简介的片段
 						var introArr = data.match(/<div id="intro">([\s\S]*?)<\/div>/);
 						var intro = introArr&&(introArr.length==2)?introArr[1]:'';
-						_this.intro = intro;
+						var intros = intro.match(/<p>([\s\S]*?)<\/p>/g);
+						for(key in intros){
+							intros[key] = intros[key].replaceAll('href','xxx').replaceAll('onclick','yyyy').replaceAll('&nbsp;','');
+						}
+						_this.intros = intros;
 						
 						var fmimgArr = data.match(/<div id="fmimg">([\s\S]*?)<\/div>/);
 						var fmimg = fmimgArr&&(fmimgArr.length==2)?fmimgArr[1]:'';

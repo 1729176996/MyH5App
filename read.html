@@ -23,11 +23,16 @@
 		  <!-- 菜单容器 -->
 		  <aside class="mui-off-canvas-left" id="offCanvasSide" v-cloak>
 			  <div class="detail">
-			  	<img class="cover" :src="cover" />
-				<div class="flex">
-					<div>{{name}}</div>
-					<div v-html="intro"></div>
-				</div>
+				  <div class="info">
+					  <img class="cover" :src="cover" />
+					  <div class="flex">
+						  {{name}}
+						  <p v-for="info in infos" v-html="info" :class="{'none':info.indexOf('动作')>=0}"></p>
+					  </div>
+				  </div>
+					<div>
+						<p v-for="intro in intros" v-html="intro" :class="{'none':intro.indexOf('<font')>=0}"></p>
+					</div>
 			  </div>
 			<div class="mui-scroll-wrapper flex" id="mulu">
 			  <div class="mui-scroll">
