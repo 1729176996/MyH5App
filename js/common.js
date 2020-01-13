@@ -1,4 +1,5 @@
 mui.init();
+//replace方法的升级版,替换所有对应字符串
 String.prototype.replaceAll=function(f,e){//吧f替换成e
     var reg=new RegExp(f,"g"); //创建正则RegExp对象   
     return this.replace(reg,e); 
