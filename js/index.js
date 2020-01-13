@@ -18,6 +18,11 @@ $(function(){
 							window.localStorage.setItem('type','all');
 							window.location.href = 'novel.html';
 						}
+					},
+					{
+						name:'历史上的今天',func:function(){
+							window.location.href = 'historyToday.html';
+						}
 					}
 				];
 				_this.$nextTick(function(){

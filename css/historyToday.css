@@ -1,0 +1,13 @@
+#main{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+#scrollWrapper{
+	top: 44px;
+	overflow: hidden;
+}
+.flex{
+	flex: 1;
+}
