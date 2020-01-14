@@ -23,6 +23,11 @@ $(function(){
 						name:'历史上的今天',func:function(){
 							window.location.href = 'historyToday.html';
 						}
+					},
+					{
+						name:'笑话',func:function(){
+							window.location.href = 'joker.html';
+						}
 					}
 				];
 				_this.$nextTick(function(){
