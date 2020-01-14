@@ -10,3 +10,8 @@
 .flex{
 	flex: 1;
 }
+
+.pic{
+	width: 100%;
+	height: auto;
+}

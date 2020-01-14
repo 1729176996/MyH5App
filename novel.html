@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="referrer" content="no-referrer" />
 		<title>小说列表</title>
 		<link href="css/mui.min.css" rel="stylesheet"/>
 		<link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
@@ -23,7 +24,7 @@
 				<h1 class="mui-title">{{type=='all'?'小说列表':'阅读进度'}}</h1>
 				<a class="mui-icon mui-icon-arrowthinup mui-pull-right" @tap="toTop"></a>
 			</header>
-			<div class="mui-scroll-wrapper" id="scrollWrapper">
+			<div class="mui-content mui-scroll-wrapper" id="scrollWrapper">
 				<div class="mui-scroll">
 					<!--这里放置真实显示的DOM内容-->
 					
