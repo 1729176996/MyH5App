@@ -28,7 +28,7 @@
 					<!--这里放置真实显示的DOM内容-->
 					
 					<ul class="mui-table-view">
-						<li v-for="item in list" class="mui-table-view-cell" @click="selectItem(item)">
+						<li v-for="item in list" class="mui-table-view-cell">
 							{{item.year}}年{{item.month}}月{{item.day}}日 {{item.title}}
 						</li>
 					</ul>
