@@ -142,7 +142,7 @@ function copyToClip(content, message) {
 // 下载wgt方法
 function downloadWgt(){
 	// 更新文件 wgt 文件地址
-	var wgtUrl = "http://192.168.0.156/H503A1250.wgt";
+	var wgtUrl = "https://1729176996.github.io/MyH5AppVersion/update.wgt";
     plus.nativeUI.showWaiting("正在更新...");
     plus.downloader.createDownload( wgtUrl, {filename:"_doc/update/"}, function(d,status){
      if ( status == 200 ) {
