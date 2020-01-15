@@ -15,10 +15,12 @@ $(function(){
 					plus.runtime.getProperty(plus.runtime.appid,function(inf){
 						// 当前版本
 						var wgtVersion = inf.version;
-						mui.ajax("https://1729176996.github.io/MyH5App/update/config.json", {
+						$.ajax({
+							url:'https://1729176996.github.io/MyH5AppVersion/version.json',
+							type:'get',
 							dataType: 'json',
-							type: 'get',
 							success:function(data){
+								console.log(data);
 								// 如果有新版本，则提示需要更新
 								if( data.version > wgtVersion ){
 									mui.confirm('检查更新','发现新版本，是否更新',['确定','取消'],function(e){
@@ -32,8 +34,10 @@ $(function(){
 									return;
 								}
 							},
-							error:function(err){}
-						});
+							error:function(xhr, errorType, error,msg){
+								mui.alert(msg,'提示','确定',null,'div');
+							}
+						})
 					});
 				}
 				if(window.plus){
@@ -42,18 +46,8 @@ $(function(){
 					document.addEventListener('plusready',plusReady,false);
 				}
 			}else{
-				/*mui.ajax("https://1729176996.github.io/MyH5App/update/config.json", {
-					dataType: 'json',
-					type: 'get',
-					success:function(data){
-						console.log(data);
-					},
-					error:function(err){
-						console.log(err);
-					}
-				});*/
 				$.ajax({
-					url:'https://1729176996.github.io/MyH5App/update/version.json',
+					url:'https://1729176996.github.io/MyH5AppVersion/version.json',
 					type:'get',
 					dataType: 'json',
 					success:function(data){
