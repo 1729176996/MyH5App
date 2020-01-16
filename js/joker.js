@@ -86,6 +86,7 @@ $(function(){
 						_this.$nextTick(function(){
 							if(_this.refreshType=='下拉'){
 								mui('#scrollWrapper').pullRefresh().endPulldownToRefresh();
+								mui('#scrollWrapper').pullRefresh().scrollTo(0,0,100);
 							}else if(_this.refreshType=='上拉'){
 								mui('#scrollWrapper').pullRefresh().endPullupToRefresh();
 							}
@@ -99,6 +100,7 @@ $(function(){
 						page--;
 						if(_this.refreshType=='下拉'){
 							mui('#scrollWrapper').pullRefresh().endPulldownToRefresh();
+							mui('#scrollWrapper').pullRefresh().scrollTo(0,0,100);
 						}else if(_this.refreshType=='上拉'){
 							mui('#scrollWrapper').pullRefresh().endPullupToRefresh();
 						}

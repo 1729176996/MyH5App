@@ -10,7 +10,15 @@
 .flex{
 	flex: 1;
 }
-
+#scrollWrapper ul{
+	background-color: #6D6D72;
+}
+#scrollWrapper li{
+	background-color: #FAFAFA;
+}
+#scrollWrapper .dtgxt,.tpxh{
+	margin-bottom: 1em;
+}
 .pic{
 	width: 100%;
 	height: auto;
