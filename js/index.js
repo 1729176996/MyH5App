@@ -78,6 +78,11 @@ $(function(){
 						name:'笑话',func:function(){
 							window.location.href = 'joker.html';
 						}
+					},
+					{
+						name:'新闻',func:function(){
+							window.location.href = 'news.html';
+						}
 					}
 				];
 				_this.$nextTick(function(){

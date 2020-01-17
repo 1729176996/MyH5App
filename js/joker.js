@@ -130,10 +130,10 @@ $(function(){
 						}else{
 							page1--;
 						}
-						if(_this.refreshType=='下拉'){
+						if(refreshType=='下拉'){
 							mui('#scrollWrapper').pullRefresh().endPulldownToRefresh();
 							mui('#scrollWrapper').pullRefresh().scrollTo(0,0,0);
-						}else if(_this.refreshType=='上拉'){
+						}else if(refreshType=='上拉'){
 							mui('#scrollWrapper').pullRefresh().endPullupToRefresh();
 						}
 						if(loading){
@@ -215,10 +215,10 @@ $(function(){
 						}else{
 							page2--;
 						}
-						if(_this.refreshType=='下拉'){
+						if(refreshType=='下拉'){
 							mui('#scrollWrapper').pullRefresh().endPulldownToRefresh();
 							mui('#scrollWrapper').pullRefresh().scrollTo(0,0,0);
-						}else if(_this.refreshType=='上拉'){
+						}else if(refreshType=='上拉'){
 							mui('#scrollWrapper').pullRefresh().endPullupToRefresh();
 						}
 						if(loading){
@@ -300,10 +300,10 @@ $(function(){
 						}else{
 							page3--;
 						}
-						if(_this.refreshType=='下拉'){
+						if(refreshType=='下拉'){
 							mui('#scrollWrapper').pullRefresh().endPulldownToRefresh();
 							mui('#scrollWrapper').pullRefresh().scrollTo(0,0,0);
-						}else if(_this.refreshType=='上拉'){
+						}else if(refreshType=='上拉'){
 							mui('#scrollWrapper').pullRefresh().endPullupToRefresh();
 						}
 						if(loading){
