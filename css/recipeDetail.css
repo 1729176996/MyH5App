@@ -1,0 +1,24 @@
+#main{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+#scrollWrapper{
+	
+}
+.flex{
+	flex: 1;
+}
+
+.badgeKey{
+	margin-right: 0.5em;
+}
+.badgeValue{
+	margin-right: 0.5em;
+}
+
+.pic{
+	width: 100%;
+	height: auto;
+}

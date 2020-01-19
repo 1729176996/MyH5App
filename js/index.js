@@ -83,6 +83,11 @@ $(function(){
 						name:'新闻',func:function(){
 							window.location.href = 'news.html';
 						}
+					},
+					{
+						name:'菜谱',func:function(){
+							window.location.href = 'recipe.html';
+						}
 					}
 				];
 				_this.$nextTick(function(){
