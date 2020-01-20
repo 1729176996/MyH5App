@@ -62,6 +62,23 @@ $(function(){
 					dataType: 'json',
 					success:function(data){
 						console.log(data);
+						var updatedContent = '';
+						if(data.updatedContent&&data.updatedContent.length>0){
+							updatedContent += '<p class="updatedContent">更新内容:</p><p class="updatedContent">';
+							for(key in data.updatedContent){
+								updatedContent += '<p class="updatedContent2">'+(key*1+1)+'.'+data.updatedContent[key]+'</p>';
+							}
+							updatedContent += '</p>';
+						}else{
+							updatedContent += '检查更新';
+						}
+						mui.confirm(updatedContent,'发现新版本，是否更新',['确定','取消'],function(e){
+							if(e.index==0){
+								downloadWgt(); // 下载wgt方法
+							}else{
+								return;
+							}
+						},'div');
 					},
 					error:function(xhr, errorType, error,msg){
 						mui.alert(msg,'提示','确定',null,'div');
