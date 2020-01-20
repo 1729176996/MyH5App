@@ -8,41 +8,31 @@
 		<link href="css/mui.min.css" rel="stylesheet"/>
 		<link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/common.css"/>
-		<link rel="stylesheet" type="text/css" href="css/recipe.css"/>
+		<link rel="stylesheet" type="text/css" href="css/recipeSearch.css"/>
 		<script src="js/mui.min.js"></script>
 		<script src="js/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/fastclick.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/weui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/recipe.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/recipeSearch.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div id="main" v-cloak>
 			<header class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-				<h1 class="mui-title">菜谱</h1>
-				<a class="mui-icon mui-icon-arrowthinup mui-pull-right" @tap="toTop"></a>
-				<a class="mui-icon mui-pull-right" @tap="toSearch">搜索</a>
+				<h1 class="mui-title"><input type="search" class="mui-input-clear" placeholder="请输入关键字" v-model="keyword"></h1>
+				<a class="mui-icon mui-icon-search mui-pull-right" @tap="search"></a>
 			</header>
 			<div class="mui-content mui-scroll-wrapper flex" id="scrollWrapper">
 				<div class="mui-scroll">
 					<!--这里放置真实显示的DOM内容-->
 					
 					<ul class="mui-table-view">
-						<li v-for="item in types" class="mui-table-view-cell mui-collapse">
-							<a class="mui-navigate-right" href="#">{{item.name}}</a>
-							<div class="mui-collapse-content">
-								
-								<ul class="mui-table-view">
-									<li v-for="itm in item.list" class="mui-table-view-cell" @click="recipeByClass(itm)">
-										<a class="mui-navigate-right">
-											{{itm.name}}
-										</a>
-									</li>
-								</ul>
-								
-							</div>
+						<li v-for="item in list" class="mui-table-view-cell" @click="showDetail(item)">
+							<a class="mui-navigate-right">
+								{{item.name}}
+							</a>
 						</li>
 					</ul>
 					<div style="width: 100%;height: 44px;"></div>

@@ -55,6 +55,10 @@ $(function(){
 			recipeByClass:function(itm){
 				window.localStorage.setItem('recipeClass',JSON.stringify(itm));
 				window.location.href = 'recipeByClass.html';
+			},
+			toSearch:function(){
+				window.localStorage.removeItem('recipeSearch');
+				window.location.href = 'recipeSearch.html';
 			}
 	    }
 	});
